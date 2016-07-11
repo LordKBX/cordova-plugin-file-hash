@@ -42,7 +42,7 @@ public class FileHash extends CordovaPlugin {
 	}
 	
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-		final String url = args.getString(0);
+		final String url = args.getString(0).replace("file:///", "/").replace("file:", "");
 		JSONObject r = new JSONObject();
 		r.put("file", url);
         if (action.equals("md2")){

@@ -5,8 +5,8 @@
     <description>Cordova FileHash Plugin</description>
     <license>Apache 2.0</license>
     <keywords>cordova,device</keywords>
-    <repo>https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git</repo>
-    <issue>https://issues.apache.org/jira/browse/CB/component/12320648</issue>
+    <repo>https://github.com/LordKBX/cordova-plugin-file-hash.git</repo>
+    <issue>https://github.com/LordKBX/cordova-plugin-file-hash/issues</issue>
 
     <js-module src="www/FileHash.js" name="FileHash">
         <clobbers target="FileHash" />
