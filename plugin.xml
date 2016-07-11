@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:rim="http://www.blackberry.com/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android"
-    id="cordova-plugin-file-hash" version="0.1.0">
+    id="cordova-plugin-file-hash" version="0.1.1">
     <name>FileHash</name>
     <description>Cordova FileHash Plugin</description>
     <license>Apache 2.0</license>
@@ -18,7 +18,9 @@
                 <param name="android-package" value="lordkbx.FileHash.FileHash"/>
             </feature>
         </config-file>
-
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+        </config-file>
         <source-file src="src/android/FileHash.java" target-dir="src/lordkbx/FileHash" />
     </platform>
 
