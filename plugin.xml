@@ -4,7 +4,7 @@
     <name>FileHash</name>
     <description>Cordova FileHash Plugin</description>
     <license>Apache 2.0</license>
-    <keywords>cordova,device</keywords>
+    <keywords>cordova,file,hash,file-hash,checksum</keywords>
     <repo>https://github.com/LordKBX/cordova-plugin-file-hash.git</repo>
     <issue>https://github.com/LordKBX/cordova-plugin-file-hash/issues</issue>
 
@@ -24,16 +24,15 @@
         <source-file src="src/android/FileHash.java" target-dir="src/lordkbx/FileHash" />
     </platform>
 
-    <!-- ios 
+    <!-- ios  -->
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
-            <feature name="Device">
-                <param name="ios-package" value="CDVDevice"/>
+            <feature name="FileHash">
+                <param name="ios-package" value="CDVFileHash"/>
             </feature>
         </config-file>
 
-        <header-file src="src/ios/CDVDevice.h" />
-        <source-file src="src/ios/CDVDevice.m" />
+        <header-file src="src/ios/CDVFileHash.h" />
+        <source-file src="src/ios/CDVFileHash.m" />
     </platform>
-	-->
 </plugin>

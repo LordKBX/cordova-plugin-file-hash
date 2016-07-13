@@ -24,7 +24,7 @@ Exemple
 `FileHash.md5("<file absolute path>",function(e){console.log(e);}`
 
 Result
-`Object {file: "<file absolute path>", result: "5b8a987f7d13a5afa7bb86bb2b0eab90"}`
+`Object {file: "<file absolute path>", algo: "MD5", result: "5b8a987f7d13a5afa7bb86bb2b0eab90"}`
 
 
 > Written with [StackEdit](https://stackedit.io/).
