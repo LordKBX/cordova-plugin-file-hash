@@ -1,93 +1,83 @@
-#include <sys/types.h>
-#include <sys/sysctl.h>
-#include "TargetConditionals.h"
-
 #import <Cordova/CDV.h>
+#import <Foundation/Foundation.h>
+#import <CommonCrypto/CommonDigest.h>
 #import "CDVFileHash.h"
-
-@implementation UIFileHash (ModelVersion)
-
-- (NSString*)modelVersion
-{
-    size_t size;
-
-    sysctlbyname("hw.machine", NULL, &size, NULL, 0);
-    char* machine = malloc(size);
-    sysctlbyname("hw.machine", machine, &size, NULL, 0);
-    NSString* platform = [NSString stringWithUTF8String:machine];
-    free(machine);
-
-    return platform;
-}
-
-@end
 
 @interface CDVFileHash () {}
 @end
 
 @implementation CDVFileHash
 
-- (NSString*)uniqueAppInstanceIdentifier:(UIFileHash*)device
-{
-    NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-    static NSString* UUID_KEY = @"CDVUUID";
-    
-    // Check user defaults first to maintain backwards compaitibility with previous versions
-    // which didn't user identifierForVendor
-    NSString* app_uuid = [userDefaults stringForKey:UUID_KEY];
-    if (app_uuid == nil) {
-        if ([device respondsToSelector:@selector(identifierForVendor)]) {
-            app_uuid = [[device identifierForVendor] UUIDString];
-        } else {
-            CFUUIDRef uuid = CFUUIDCreate(NULL);
-            app_uuid = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, uuid);
-            CFRelease(uuid);
-        }
+- (void)md2:(CDVInvokedUrlCommand*)command {
+	NSString* FileURL = [command argumentAtIndex:0];
+	NSDictionary* deviceProperties = @{ @"file": FileURL, @"algo": @"MD2", @"result": @"" };
 
-        [userDefaults setObject:app_uuid forKey:UUID_KEY];
-        [userDefaults synchronize];
-    }
-    
-    return app_uuid;
-}
 
-- (void)getDeviceInfo:(CDVInvokedUrlCommand*)command
-{
-    NSDictionary* deviceProperties = [self deviceProperties];
-    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:deviceProperties];
-
+	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:deviceProperties];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
-- (NSDictionary*)deviceProperties
-{
-    UIFileHash* device = [UIFileHash currentDevice];
+- (void)md5:(CDVInvokedUrlCommand*)command {
+	NSString* FileURL = [command argumentAtIndex:0];
+	NSDictionary* deviceProperties = @{ @"file": FileURL, @"algo": @"MD5", @"result": @"" };
+	
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	// Make sure the file exists
+	if( [fileManager fileExistsAtPath:FileURL isDirectory:nil] )
+	{
+		NSData *data = [NSData dataWithContentsOfFile:FileURL];
+		unsigned char digest[CC_MD5_DIGEST_LENGTH];
+		CC_MD5( data.bytes, (CC_LONG)data.length, digest );
+ 
+		NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+ 
+		for( int i = 0; i < CC_MD5_DIGEST_LENGTH; i++ )
+		{
+			[output appendFormat:@"%02x", digest[i]];
+		}
+ 
+		deviceProperties = @{ @"file": FileURL, @"algo": @"MD5", @"result": output };
+	}
 
-    return @{
-             @"manufacturer": @"Apple",
-             @"model": [device modelVersion],
-             @"platform": @"iOS",
-             @"version": [device systemVersion],
-             @"uuid": [self uniqueAppInstanceIdentifier:device],
-             @"cordova": [[self class] cordovaVersion],
-             @"isVirtual": @([self isVirtual])
-             };
+	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:deviceProperties];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
-+ (NSString*)cordovaVersion
-{
-    return CDV_VERSION;
+- (void)sha1:(CDVInvokedUrlCommand*)command {
+	NSString* FileURL = [command argumentAtIndex:0];
+	NSDictionary* deviceProperties = @{ @"file": FileURL, @"algo": @"SHA-1", @"result": @"" };
+
+
+	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:deviceProperties];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
-- (BOOL)isVirtual
-{
-    #if TARGET_OS_SIMULATOR
-        return true;
-    #elif TARGET_IPHONE_SIMULATOR
-        return true;
-    #else
-        return false;
-    #endif
+- (void)sha256:(CDVInvokedUrlCommand*)command {
+	NSString* FileURL = [command argumentAtIndex:0];
+	NSDictionary* deviceProperties = @{ @"file": FileURL, @"algo": @"SHA-256", @"result": @"" };
+
+
+	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:deviceProperties];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
+
+- (void)sha384:(CDVInvokedUrlCommand*)command {
+	NSString* FileURL = [command argumentAtIndex:0];
+	NSDictionary* deviceProperties = @{ @"file": FileURL, @"algo": @"SHA-384", @"result": @"" };
+
+
+	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:deviceProperties];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
+- (void)sha512:(CDVInvokedUrlCommand*)command {
+	NSString* FileURL = [command argumentAtIndex:0];
+	NSDictionary* deviceProperties = @{ @"file": FileURL, @"algo": @"SHA-512", @"result": @"" };
+
+
+	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:deviceProperties];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 
 @end

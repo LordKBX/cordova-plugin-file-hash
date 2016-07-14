@@ -1,11 +1,13 @@
-#import <UIKit/UIKit.h>
+
 #import <Cordova/CDVPlugin.h>
 
 @interface CDVFileHash : CDVPlugin
-{}
 
-+ (NSString*)cordovaVersion;
-
-- (void)getDeviceInfo:(CDVInvokedUrlCommand*)command;
+- (void)md2:(CDVInvokedUrlCommand*)command;
+- (void)md5:(CDVInvokedUrlCommand*)command;
+- (void)sha1:(CDVInvokedUrlCommand*)command;
+- (void)sha256:(CDVInvokedUrlCommand*)command;
+- (void)sha384:(CDVInvokedUrlCommand*)command;
+- (void)sha512:(CDVInvokedUrlCommand*)command;
 
 @end
