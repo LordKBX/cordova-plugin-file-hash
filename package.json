@@ -1,11 +1,12 @@
 {
   "name": "cordova-plugin-file-hash",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Cordova FileHash Plugin",
   "cordova": {
     "id": "cordova-plugin-file-hash",
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   },
   "repository": {
@@ -14,9 +15,13 @@
   },
   "keywords": [
     "cordova",
-    "device",
+    "file",
+    "hash",
+    "file-hash",
+    "checksum",
     "ecosystem:cordova",
-    "cordova-android"
+    "cordova-android",
+    "cordova-ios"
   ],
   "author": "LordKBX",
   "license": "Apache 2.0",

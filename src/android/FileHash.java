@@ -37,6 +37,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.net.URLDecoder;
 /**
  *
  * @author LordKBX
@@ -55,8 +56,8 @@ public class FileHash extends CordovaPlugin {
 	}
 	
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-		final String url = args.getString(0);//file:///android_asset
-		
+		String url = args.getString(0);
+		url = URLDecoder.decode(url);
 		System.out.println("File root system "+context.getPackageName());
 		JSONObject r = new JSONObject();
 		String ealgo = "";
