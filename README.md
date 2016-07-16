@@ -5,7 +5,7 @@ description: file hash cordova extention
 # cordova-plugin-file-hash
 This plugin provides file hash functions
 
-Platforms: Android(tested in 5.0 for the lowest), IOS(>=8.0 form Apple doc info)
+Platforms: **Android**(tested in 5.0 for the lowest), **IOS**(>=8.0 form Apple doc info)
 
 If your intrested i search help for an adaptation on Windows Phone(W10 ?), in that case leave a message [here](https://github.com/LordKBX/cordova-plugin-file-hash/issues)
 
