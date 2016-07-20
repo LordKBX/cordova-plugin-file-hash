@@ -9,7 +9,7 @@ This plugin provides file hash functions
 
 ##Platforms
 |**Android**|**IOS**|
-|:-:|:-:|
+|:---:|:---:|
 |&gt;=5.0|&gt;= 8.0|
 
 
@@ -17,7 +17,7 @@ If your intrested i search help for an adaptation on Windows Phone(W10 ?), in th
 
 ###***list of functions***
 |**md2**|**md5**|**sha1**|**sha256**|**sha384**|**sha512**|
-|:-:|:-:|:-:|:-:|:-:|:-:|
+|:---:|:---:|:---:|:---:|:---:|:---:|
 
 ###***functions usage***
 
@@ -35,7 +35,7 @@ the errorCallback function receive a JSON structure, here the content of the str
 	
 ###***List of error codes***
 |code|message|additional informations|
-|:-|:-|:-|
+|:---|:---|:---|
 |0|Execution Error|unknow error|
 |1|Unknown Algorithm|-|
 |2|File not found|-|
