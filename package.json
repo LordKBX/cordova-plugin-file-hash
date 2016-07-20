@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-file-hash",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Cordova FileHash Plugin",
   "cordova": {
     "id": "cordova-plugin-file-hash",

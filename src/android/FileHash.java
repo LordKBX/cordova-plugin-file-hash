@@ -46,6 +46,7 @@ public class FileHash extends CordovaPlugin {
 	
 	private String AppId;
 	private Context context;
+	private String[] errorCodes = {"Execution Error", "Unknown Algorithm", "File not found", "File access error", "Digest error"};
 
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		super.initialize(cordova, webView);
@@ -68,34 +69,47 @@ public class FileHash extends CordovaPlugin {
 		if (action.equals("sha384")){ealgo = "SHA-384";}
 		if (action.equals("sha512")){ealgo = "SHA-512";}
         if (action.equals("md2") || action.equals("md5") || action.equals("sha1") || action.equals("sha256") || action.equals("sha384") || action.equals("sha512")){
-			r.put("file", url);
-			r.put("algo", ealgo);
-			r.put("result", central(url, ealgo));
-			callbackContext.success(r);
-			return true;
+			String[] rez = central(url, ealgo);
+			if(rez[1] == ""){
+				r.put("file", url);
+				r.put("algo", ealgo);
+				r.put("result", rez[0]);
+				callbackContext.success(r);
+				}
+			else{ 
+				r.put("code", rez[0]);
+				r.put("message", rez[1]);
+				callbackContext.error(r); 
+				}
+			}
+		else{ r.put("code", 1); r.put("message", this.errorCodes[1]); callbackContext.error(r);}
+		return true;
 		}
-	r.put("result", "");
-    return false;
-    }
 
-	public String central(String fileURL, String algo){
+		
+	//java.io.FileNotFoundException
+	public String[] central(String fileURL, String algo){
 		FileInputStream fis;
+		String[] ret = {"",""};
 		try{
-			MessageDigest md = MessageDigest.getInstance(algo);
 			if(fileURL.contains("file:///android_asset/")){
 				fileURL = fileURL.replace("file:///android_asset/", "");
 				String[] tab = fileURL.split("/");
 				String endUrl = "/data/data/" + this.AppId + "/cache/" + fileURL.replace("/","_");
-				InputStream in = this.context.getAssets().open(fileURL);
-				OutputStream out = new FileOutputStream(endUrl);
 				
-				// Transfer bytes from in to out
-				byte[] buf = new byte[1024];
-				int len; while ((len = in.read(buf)) > 0) out.write(buf, 0, len);
-				in.close(); out.close();
-				fis = new FileInputStream(endUrl);
+					InputStream in = this.context.getAssets().open(fileURL);
+					OutputStream out = new FileOutputStream(endUrl);
+					
+					// Transfer bytes from in to out
+					byte[] buf = new byte[1024];
+					int len; while ((len = in.read(buf)) > 0) out.write(buf, 0, len);
+					in.close(); out.close();
+				fileURL = endUrl;
 				}
-			else{ fileURL = fileURL.replace("file:///", "/").replace("file:", ""); fis = new FileInputStream(fileURL);}
+			else{ fileURL = fileURL.replace("file:///", "/").replace("file:", "");}
+		
+			fis = new FileInputStream(fileURL);
+			MessageDigest md = MessageDigest.getInstance(algo);
 			byte[] dataBytes = new byte[1024];
 			int nread = 0; 
 			while ((nread = fis.read(dataBytes)) != -1){ md.update(dataBytes, 0, nread); };
@@ -103,11 +117,21 @@ public class FileHash extends CordovaPlugin {
 			//convert the byte to hex format method 1
 			StringBuffer sb = new StringBuffer();
 			for (int i = 0; i < mdbytes.length; i++) { sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1)); }
-			return sb.toString();
+			ret[0] = sb.toString();
+			System.out.println(sb.toString());
+			return ret;
 			}
 		catch(Exception ex){
-			return "";
+			if(ex instanceof FileNotFoundException){
+				File f = new File(fileURL);
+				if(f.exists()){ret[0] = Integer.toString(3); ret[1] = this.errorCodes[3];}
+				else{ret[0] = Integer.toString(2); ret[1] = this.errorCodes[2];}
+				return ret;
+				}
+			else{System.out.println(ex); ret[0] = Integer.toString(4); ret[1] = this.errorCodes[4]; return ret;}
 			}
+		
+		
 		}
-	
+		
 }

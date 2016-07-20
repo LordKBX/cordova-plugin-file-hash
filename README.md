@@ -1,6 +1,8 @@
 ---
 title: cordova-plugin-file-hash
 description: file hash cordova extention
+version: 0.4
+Status: 50% (Android->OK, IOS->PENDING)
 ---
 # cordova-plugin-file-hash
 This plugin provides file hash functions
@@ -19,18 +21,29 @@ If your intrested i search help for an adaptation on Windows Phone(W10 ?), in th
 
 ###***functions usage***
 
-    [window.]FileHash.<function_name>(<file_absolute_path>, callback);
+    [window.]FileHash.<function_name>(<file_absolute_path>, successCallback, errorCallback);
 
-![enter image description here](https://cdn1.iconfinder.com/data/icons/nuove/32x32/actions/messagebox_warning.png) require and absolute path(file:// format, use [cordova-plugin-file](https://www.npmjs.com/package/cordova-plugin-file) for retrieve the appfolder)
+![warning](https://cdn1.iconfinder.com/data/icons/nuove/32x32/actions/messagebox_warning.png) require and absolute path(file:// format, use [cordova-plugin-file](https://www.npmjs.com/package/cordova-plugin-file) for retrieve the appfolder)
 
-the callback function receive a JSON structure, here the result for MD5 hash of a file
+the successCallback function receive a JSON structure, here the content of the structure
 
     Object{file: "<file_absolute_path>", algo: "<function_algorithm>", result: "<returned_file_hash>"}
 
-![enter image description here](https://cdn2.iconfinder.com/data/icons/freecns-cumulus/32/519791-101_Warning-64.png) if the file not exist the returned hash was an empty string
+the errorCallback function receive a JSON structure, here the content of the structure
 
+    Object{code: <int_return_code>, message: "<error_description>"}
+	
+###***List of error codes***
+|code|message|additional informations|
+|:-|:-|:-|
+|0|Execution Error|unknow error|
+|1|Unknown Algorithm||
+|2|File not found||
+|3|File access error|no sufficents access rights or already used file|
+|4|Digest error|cryptography processing error|
 
-Exemple on Android
+###***Exemple on Android***
+![warning](https://cdn1.iconfinder.com/data/icons/nuove/32x32/actions/messagebox_warning.png) this exemple use [cordova-plugin-file](https://www.npmjs.com/package/cordova-plugin-file) for retrieve the appfolder(cordova.file.applicationDirectory)
 
     FileHash.md5(cordova.file.applicationDirectory+'www/index.html',function(e){console.log(e);}
 
