@@ -1,8 +1,8 @@
 ---
 title: cordova-plugin-file-hash
 description: file hash cordova extention
-version: 0.4
-Status: 50% (Android->OK, IOS->PENDING)
+version: 0.4.0
+Status: 100% (Android->OK, IOS->OK)
 ---
 # cordova-plugin-file-hash
 This plugin provides file hash functions
@@ -35,10 +35,10 @@ the errorCallback function receive a JSON structure, here the content of the str
 	
 ###***List of error codes***
 |code|message|additional informations|
-|:---|:---|:---|
+|:---:|:---|:---|
 |0|Execution Error|unknow error|
 |1|Unknown Algorithm|-|
-|2|File not found|-|
+|2|File not found|on IOS was also send in case of access error|
 |3|File access error|no sufficents access rights or already used file|
 |4|Digest error|cryptography processing error|
 
