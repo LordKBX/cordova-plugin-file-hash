@@ -15,13 +15,13 @@ If your intrested i search help for an adaptation on Windows Phone(W10 ?), in th
 
 ###***functions usage***
 
-    [window.]FileHash.<function_name>(<file_absolute_path>, successCallback, errorCallback);
+    [window.]FileHash.<function>(<file_absolute_path>, successCallback, errorCallback);
 
 ![warning](https://cdn1.iconfinder.com/data/icons/nuove/32x32/actions/messagebox_warning.png) require and absolute path(file:// format, use [cordova-plugin-file](https://www.npmjs.com/package/cordova-plugin-file) for retrieve the appfolder)
 
 the successCallback function receive a JSON structure, here the content of the structure
 
-    Object{file: "<file_absolute_path>", algo: "<function_algorithm>", result: "<returned_file_hash>"}
+    Object{file: "<file_absolute_path>", algo: "<algorithm>", result: "<file_hash>"}
 
 the errorCallback function receive a JSON structure, here the content of the structure
 
@@ -39,11 +39,13 @@ the errorCallback function receive a JSON structure, here the content of the str
 ###***Exemple on Android***
 ![warning](https://cdn1.iconfinder.com/data/icons/nuove/32x32/actions/messagebox_warning.png) this exemple use [cordova-plugin-file](https://www.npmjs.com/package/cordova-plugin-file) for retrieve the appfolder(cordova.file.applicationDirectory)
 
-    FileHash.md5(cordova.file.applicationDirectory+'www/index.html',function(e){console.log(e);}
+    FileHash.md5(cordova.file.applicationDirectory+'www/index.html',
+		function(e){console.log(e);})
 
 Result
 
-    Object {file: "file:///android_asset/www/index.html", algo: "MD5", result: "5b8a987f7d13a5afa7bb86bb2b0eab90"}
+    Object {file: "file:///android_asset/www/index.html", algo: "MD5",
+		result: "5b8a987f7d13a5afa7bb86bb2b0eab90"}
 
 
 > Written with [StackEdit](https://stackedit.io/).
