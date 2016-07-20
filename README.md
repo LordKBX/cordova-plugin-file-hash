@@ -37,8 +37,8 @@ the errorCallback function receive a JSON structure, here the content of the str
 |code|message|additional informations|
 |:-|:-|:-|
 |0|Execution Error|unknow error|
-|1|Unknown Algorithm| |
-|2|File not found| |
+|1|Unknown Algorithm|-|
+|2|File not found|-|
 |3|File access error|no sufficents access rights or already used file|
 |4|Digest error|cryptography processing error|
 
