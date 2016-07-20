@@ -1,12 +1,6 @@
----
-title: cordova-plugin-file-hash
-description: file hash cordova extention
-version: 0.4.0
-Status: 100% (Android->OK, IOS->OK)
----
 # cordova-plugin-file-hash
 This plugin provides file hash functions
-
+##Version 0.4.1
 ##Platforms
 |**Android**|**IOS**|
 |:---:|:---:|
