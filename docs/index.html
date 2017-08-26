@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/cordova-plugin-file-hash/style.css">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">cordova-plugin-file-hash</h1>
+      <h2 class="project-tagline">Cordova plugin for retrieve file hash</h2>
+      
+        <a href="https://github.com/LordKBX/cordova-plugin-file-hash" class="btn">View on GitHub</a>
+      
+      
+    </section>
+
+    <section class="main-content">
+      <h1 id="cordova-plugin-file-hash">cordova-plugin-file-hash</h1>
+
+<p>This plugin provides file hash functions</p>
+
+
+
+<h2 id="version-041">Version 0.4.1</h2>
+
+
+
+<h2 id="platforms">Platforms</h2>
+
+<table>
+<thead>
+<tr>
+  <th align="center"><strong>Android</strong></th>
+  <th align="center"><strong>IOS</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+  <td align="center">&gt;=5.0</td>
+  <td align="center">&gt;= 8.0</td>
+</tr>
+</tbody></table>
+
+
+<p>If your intrested i search help for an adaptation on Windows Phone(W10 ?), in that case leave a message <a href="https://github.com/LordKBX/cordova-plugin-file-hash/issues">here</a></p>
+
+
+
+<h3 id="list-of-functions"><strong><em>list of functions</em></strong></h3>
+
+<table>
+<thead>
+<tr>
+  <th align="center"><strong>md2</strong></th>
+  <th align="center"><strong>md5</strong></th>
+  <th align="center"><strong>sha1</strong></th>
+  <th align="center"><strong>sha256</strong></th>
+  <th align="center"><strong>sha384</strong></th>
+  <th align="center"><strong>sha512</strong></th>
+</tr>
+</thead>
+</table>
+
+
+
+
+<h3 id="functions-usage"><strong><em>functions usage</em></strong></h3>
+
+<pre><code>[window.]FileHash.&lt;function&gt;(&lt;file_absolute_path&gt;, successCallback, errorCallback);
+</code></pre>
+
+<p><img src="https://cdn1.iconfinder.com/data/icons/nuove/32x32/actions/messagebox_warning.png" alt="warning" title=""> require and absolute path(file:// format, use <a href="https://www.npmjs.com/package/cordova-plugin-file">cordova-plugin-file</a> for retrieve the appfolder)</p>
+
+<p>the successCallback function receive a JSON structure, here the content of the structure</p>
+
+<pre><code>Object{file: "&lt;file_absolute_path&gt;", algo: "&lt;algorithm&gt;", result: "&lt;file_hash&gt;"}
+</code></pre>
+
+<p>the errorCallback function receive a JSON structure, here the content of the structure</p>
+
+<pre><code>Object{code: &lt;int_return_code&gt;, message: "&lt;error_description&gt;"}
+</code></pre>
+
+
+
+<h3 id="list-of-error-codes"><strong><em>List of error codes</em></strong></h3>
+
+<table>
+<thead>
+<tr>
+  <th align="center">code</th>
+  <th align="left">message</th>
+  <th align="left">additional informations</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td align="center">0</td>
+  <td align="left">Execution Error</td>
+  <td align="left">unknow error</td>
+</tr>
+<tr>
+  <td align="center">1</td>
+  <td align="left">Unknown Algorithm</td>
+  <td align="left">-</td>
+</tr>
+<tr>
+  <td align="center">2</td>
+  <td align="left">File not found</td>
+  <td align="left">on IOS was also send in case of access error</td>
+</tr>
+<tr>
+  <td align="center">3</td>
+  <td align="left">File access error</td>
+  <td align="left">no sufficents access rights or already used file</td>
+</tr>
+<tr>
+  <td align="center">4</td>
+  <td align="left">Digest error</td>
+  <td align="left">cryptography processing error</td>
+</tr>
+</tbody></table>
+
+
+
+
+<h3 id="exemple-on-android"><strong><em>Exemple on Android</em></strong></h3>
+
+<p><img src="https://cdn1.iconfinder.com/data/icons/nuove/32x32/actions/messagebox_warning.png" alt="warning" title=""> this exemple use <a href="https://www.npmjs.com/package/cordova-plugin-file">cordova-plugin-file</a> for retrieve the appfolder(cordova.file.applicationDirectory)</p>
+
+<pre><code>FileHash.md5(cordova.file.applicationDirectory+'www/index.html',
+    function(e){console.log(e);})
+</code></pre>
+
+<p>Result</p>
+
+<pre><code>Object {file: "file:///android_asset/www/index.html", algo: "MD5",
+    result: "5b8a987f7d13a5afa7bb86bb2b0eab90"}
+</code></pre>
+
+<footer class="site-footer">
+          <span class="site-footer-owner"><a href="https://github.com/LordKBX/cordova-plugin-file-hash">cordova-plugin-file-hash</a> is maintained by <a href="https://github.com/LordKBX">LordKBX</a>.</span>
+      </footer>
+</section>
+  </body>
+</html>
