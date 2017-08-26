@@ -31,7 +31,7 @@ the errorCallback function receive a JSON structure, here the content of the str
 |code|message|additional informations|
 |:---:|:---|:---|
 |0|Execution Error|unknow error|
-|1|Unknown Algorithm|-|
+|1|Unknown Algorithm|only if you do somthing stupid with the plugin code|
 |2|File not found|on IOS was also send in case of access error|
 |3|File access error|no sufficents access rights or already used file|
 |4|Digest error|cryptography processing error|
